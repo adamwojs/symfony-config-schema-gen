@@ -34,6 +34,6 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    AdamWojs\ConfigJsonSchemaGenBundle\ConfigJsonSchemaGenBundle::class => ['all' => true],
+    AdamWojs\SymfonyConfigGenBundle\SymfonyConfigSchemaGenBundle::class => ['all' => true],
 ];
 ```

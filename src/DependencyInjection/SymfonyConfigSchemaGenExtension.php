@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AdamWojs\ConfigJsonSchemaGenBundle\DependencyInjection;
+namespace AdamWojs\SymfonyConfigGenBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-final class ConfigJsonSchemaGenExtension extends Extension
+final class SymfonyConfigSchemaGenExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

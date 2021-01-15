@@ -7,7 +7,7 @@
         convertWarningsToExceptions="true"
         colors="true">
     <testsuites>
-        <testsuite name="AdamWojs\ConfigJsonSchemaGenBundle">
+        <testsuite name="AdamWojs\SymfonyConfigSchemaGenBundle">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

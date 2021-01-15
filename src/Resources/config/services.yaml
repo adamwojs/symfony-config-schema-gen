@@ -1,6 +1,63 @@
 services:
     _defaults:
-        autowire: true
-        autoconfigure: true
+        autowire: false
+        autoconfigure: false
         public: false
 
+    AdamWojs\SymfonyConfigGenBundle\Command\ConfigDumpSchemaCommand:
+        arguments:
+            $serializerFactory: '@AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory'
+        tags:
+            - { name: console.command, command: 'config:dump-schema' }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory:
+        arguments:
+            $normalizers: !tagged_iterator config_schema_generator.normalizer
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\ConfigurationCollectionNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\ConfigurationNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\PrototypedArrayNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\ArrayNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\BooleanNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\EnumNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\FloatNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\IntegerNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\NumericNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\ScalarNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\VariableNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
+
+    AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node\BaseNodeNormalizer:
+        tags:
+            - { name: config_schema_generator.normalizer }
