@@ -1,14 +1,18 @@
-# config-json-schema-gen
+# adamwojs/symfony-config-schema-gen
+
+A utility bundle to generates JSON Schema from Symfony configuration.
+
+### Basic usage
+
+```console
+$ php bin/console config:dump-schema > config.schema.json
+```
 
 ## Installation
 
 ### Applications that use Symfony Flex
 
 Open a command console, enter your project directory and execute:
-
-```console
-$ composer require adamwojs/config-json-schema-gen
-```
 
 ### Applications that don't use Symfony Flex
 
@@ -18,7 +22,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-$ composer require adamwojs/config-json-schema-gen
+$ composer require adamwojs/symfony-config-schema-gen
 ```
 
 This command requires you to have Composer installed globally, as explained
@@ -36,4 +40,35 @@ return [
     // ...
     AdamWojs\SymfonyConfigGenBundle\SymfonyConfigSchemaGenBundle::class => ['all' => true],
 ];
+```
+
+## Usage
+
+### Basic usage
+
+```console
+$ composer require adamwojs/symfony-config-schema-gen
+```
+
+### Synopsis
+
+```
+Usage:
+  config:dump-schema [options] [--] [<extensions>...]
+
+Arguments:
+  extensions                     Extensions whitelist
+
+Options:
+      --schema-id=SCHEMA-ID      Unique identifier for the schema [default: "http://symfony.com/schema/config.schema.json"]
+      --format=FORMAT            Output format [default: "json"]
+  -h, --help                     Display this help message
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi                     Force ANSI output
+      --no-ansi                  Disable ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+  -e, --env=ENV                  The Environment name. [default: "dev"]
+      --no-debug                 Switches off debug mode.
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
