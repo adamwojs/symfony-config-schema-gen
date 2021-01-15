@@ -2,12 +2,6 @@
 
 A utility bundle to generates JSON Schema from Symfony configuration.
 
-### Basic usage
-
-```console
-$ php bin/console config:dump-schema > config.schema.json
-```
-
 ## Installation
 
 ### Applications that use Symfony Flex
@@ -18,19 +12,19 @@ Open a command console, enter your project directory and execute:
 
 #### Step 1: Download the Bundle
 
-Open a command console, enter your project directory and execute the
+Open a command console, enter your project directory and execute the  
 following command to download the latest stable version of this bundle:
 
 ```console
 $ composer require adamwojs/symfony-config-schema-gen
 ```
 
-This command requires you to have Composer installed globally, as explained
+This command requires you to have Composer installed globally, as explained  
 in the [installation chapter](https://getcomposer.org/doc/00-intro.md) of the Composer documentation.
 
 #### Step 2: Enable the Bundle
 
-Then, enable the bundle by adding it to the list of registered bundles
+Then, enable the bundle by adding it to the list of registered bundles  
 in the `config/bundles.php` file of your project:
 
 ```php
@@ -47,7 +41,7 @@ return [
 ### Basic usage
 
 ```console
-$ composer require adamwojs/symfony-config-schema-gen
+$ php bin/console config:dump-schema > config.schema.json
 ```
 
 ### Synopsis
