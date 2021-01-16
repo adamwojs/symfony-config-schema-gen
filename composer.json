@@ -2,7 +2,7 @@
   "name": "adamwojs/symfony-config-schema-gen",
   "license": "GPL-2.0-only",
   "keywords": [
-    "symfony", "config", "json-schema"
+    "symfony", "symfony-bundle", "config", "json-schema"
   ],
   "type": "synfony-bundle",
   "require": {
