@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node;
 
-use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\PrototypedArrayNode;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -13,19 +12,25 @@ class PrototypedArrayNodeNormalizer extends BaseNodeNormalizer implements Normal
 {
     use NormalizerAwareTrait;
 
+    /**
+     * @param \Symfony\Component\Config\Definition\PrototypedArrayNode $node
+     */
     public function normalize($node, string $format = null, array $context = [])
     {
         $schema = parent::normalize($node, $format, $context);
 
-        $prototype = $node->getPrototype();
+        $prototypeSchema = $this->normalizer->normalize($node->getPrototype(), $format, $context);
 
-        if ($prototype instanceof ArrayNode) {
-            $schema['type'] = 'object';
-            $schema['additionalProperties'] = $this->normalizer->normalize($prototype, $format, $context);
-        } else {
-            $schema['type'] = 'array';
-            $schema['items'] = $this->normalizer->normalize($prototype, $format, $context);
-        }
+        $schema['oneOf'] = [
+            [
+                'type' => 'array',
+                'items' => $prototypeSchema,
+            ],
+            [
+                'type' => 'object',
+                'additionalProperties' => $prototypeSchema,
+            ],
+        ];
 
         return $schema;
     }

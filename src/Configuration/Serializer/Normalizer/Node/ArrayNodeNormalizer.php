@@ -12,6 +12,9 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
 {
     use NormalizerAwareTrait;
 
+    /**
+     * @param \Symfony\Component\Config\Definition\ArrayNode $node
+     */
     public function normalize($node, string $format = null, array $context = [])
     {
         $schema = parent::normalize($node, $format, $context);

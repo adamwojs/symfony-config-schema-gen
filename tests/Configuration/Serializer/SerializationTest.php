@@ -127,64 +127,218 @@ final class SerializationTest extends TestCase
                                         'baz',
                                     ],
                                 ],
-                                'type' => 'array',
-                                'items' => [
-                                    '$ref' => '#/definitions/scalar',
-                                ],
-                            ],
-                            'parameters' => [
-                                'type' => 'array',
-                                'items' => [
-                                    'description' => 'Parameter name',
-                                    '$ref' => '#/definitions/scalar',
-                                ],
-                            ],
-                            'connections' => [
-                                'type' => 'object',
-                                'additionalProperties' => [
-                                    'type' => 'object',
-                                    'properties' => [
-                                        'user' => [
-                                            '$ref' => '#/definitions/scalar',
-                                        ],
-                                        'pass' => [
+                                'oneOf' => [
+                                    [
+                                        'type' => 'array',
+                                        'items' => [
                                             '$ref' => '#/definitions/scalar',
                                         ],
                                     ],
-                                    'additionalProperties' => false,
+                                    [
+                                        'type' => 'object',
+                                        'additionalProperties' => [
+                                            '$ref' => '#/definitions/scalar',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'parameters' => [
+                                'oneOf' => [
+                                    [
+                                        'type' => 'array',
+                                        'items' => [
+                                            'description' => 'Parameter name',
+                                            '$ref' => '#/definitions/scalar',
+                                        ],
+                                    ],
+                                    [
+                                        'type' => 'object',
+                                        'additionalProperties' => [
+                                            'description' => 'Parameter name',
+                                            '$ref' => '#/definitions/scalar',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'connections' => [
+                                'oneOf' => [
+                                    [
+                                        'type' => 'array',
+                                        'items' => [
+                                            'type' => 'object',
+                                            'properties' => [
+                                                'user' => [
+                                                    '$ref' => '#/definitions/scalar',
+                                                ],
+                                                'pass' => [
+                                                    '$ref' => '#/definitions/scalar',
+                                                ],
+                                            ],
+                                            'additionalProperties' => false,
+                                        ],
+                                    ],
+                                    [
+                                        'type' => 'object',
+                                        'additionalProperties' => [
+                                            'type' => 'object',
+                                            'properties' => [
+                                                'user' => [
+                                                    '$ref' => '#/definitions/scalar',
+                                                ],
+                                                'pass' => [
+                                                    '$ref' => '#/definitions/scalar',
+                                                ],
+                                            ],
+                                            'additionalProperties' => false,
+                                        ],
+                                    ],
                                 ],
                             ],
                             'cms_pages' => [
-                                'type' => 'object',
-                                'additionalProperties' => [
-                                    'type' => 'object',
-                                    'additionalProperties' => [
-                                        'type' => 'object',
-                                        'properties' => [
-                                            'title' => [
-                                                '$ref' => '#/definitions/scalar',
-                                            ],
-                                            'path' => [
-                                                '$ref' => '#/definitions/scalar',
+                                'oneOf' => [
+                                    [
+                                        'type' => 'array',
+                                        'items' => [
+                                            'oneOf' => [
+                                                [
+                                                    'type' => 'array',
+                                                    'items' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'title' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                            'path' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'required' => ['title', 'path'],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                                [
+                                                    'type' => 'object',
+                                                    'additionalProperties' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'title' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                            'path' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'required' => ['title', 'path'],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
                                             ],
                                         ],
-                                        'required' => ['title', 'path'],
-                                        'additionalProperties' => false,
+                                    ],
+                                    [
+                                        'type' => 'object',
+                                        'additionalProperties' => [
+                                            'oneOf' => [
+                                                [
+                                                    'type' => 'array',
+                                                    'items' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'title' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                            'path' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'required' => ['title', 'path'],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                                [
+                                                    'type' => 'object',
+                                                    'additionalProperties' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'title' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                            'path' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'required' => ['title', 'path'],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
                             'pipou' => [
-                                'type' => 'object',
-                                'additionalProperties' => [
-                                    'type' => 'object',
-                                    'additionalProperties' => [
-                                        'type' => 'object',
-                                        'properties' => [
-                                            'didou' => [
-                                                '$ref' => '#/definitions/scalar',
+                                'oneOf' => [
+                                    [
+                                        'type' => 'array',
+                                        'items' => [
+                                            'oneOf' => [
+                                                [
+                                                    'type' => 'array',
+                                                    'items' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'didou' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                                [
+                                                    'type' => 'object',
+                                                    'additionalProperties' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'didou' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
                                             ],
                                         ],
-                                        'additionalProperties' => false,
+                                    ],
+                                    [
+                                        'type' => 'object',
+                                        'additionalProperties' => [
+                                            'oneOf' => [
+                                                [
+                                                    'type' => 'array',
+                                                    'items' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'didou' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                                [
+                                                    'type' => 'object',
+                                                    'additionalProperties' => [
+                                                        'type' => 'object',
+                                                        'properties' => [
+                                                            'didou' => [
+                                                                '$ref' => '#/definitions/scalar',
+                                                            ],
+                                                        ],
+                                                        'additionalProperties' => false,
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
