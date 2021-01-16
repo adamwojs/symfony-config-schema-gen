@@ -56,6 +56,7 @@ Arguments:
 Options:
       --schema-id=SCHEMA-ID      Unique identifier for the schema [default: "http://symfony.com/schema/config.schema.json"]
       --format=FORMAT            Output format [default: "json"]
+      --pretty-print             Prettify schema output
   -h, --help                     Display this help message
   -q, --quiet                    Do not output any message
   -V, --version                  Display this application version
@@ -64,5 +65,6 @@ Options:
   -n, --no-interaction           Do not ask any interactive question
   -e, --env=ENV                  The Environment name. [default: "dev"]
       --no-debug                 Switches off debug mode.
+      --siteaccess[=SITEACCESS]  SiteAccess to use for operations. If not provided, default siteaccess will be used
   -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```

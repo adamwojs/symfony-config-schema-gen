@@ -12,6 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Serializer\Serializer;
 
 final class ConfigDumpSchemaCommand extends AbstractConfigCommand
 {
@@ -51,20 +52,32 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             'Output format',
             'json'
         );
+
+        $this->addOption(
+            'pretty-print',
+            null,
+            InputOption::VALUE_NONE,
+            'Prettify schema output'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $serializer = $this->serializerFactory->createSerializer();
+        $format = $input->getOption('format');
 
-        $schema = $serializer->serialize(
+        $context = [];
+        if ($input->getOption('pretty-print') && $format === 'json') {
+            $context = [
+                'json_encode_options' => JSON_PRETTY_PRINT,
+            ];
+        }
+
+        $schema = $this->createSerializer()->serialize(
             $this->getConfigurationCollection(
                 $input->getArgument('extensions')
             ),
-            $input->getOption('format'),
-            [
-                'json_encode_options' => JSON_PRETTY_PRINT
-            ]
+            $format,
+            $context
         );
 
         $output->writeln($schema);
@@ -101,5 +114,10 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         }
 
         return new ConfigurationCollection($configurations);
+    }
+
+    private function createSerializer(): Serializer
+    {
+        return $this->serializerFactory->createSerializer();
     }
 }
