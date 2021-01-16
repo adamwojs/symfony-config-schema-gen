@@ -32,7 +32,7 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    AdamWojs\SymfonyConfigGenBundle\SymfonyConfigSchemaGenBundle::class => ['all' => true],
+    AdamWojs\SymfonyConfigGenBundle\SymfonyConfigSchemaGenBundle::class => ['dev' => true],
 ];
 ```
 
