@@ -77,6 +77,10 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
                     ],
                 ],
             ],
+            'parameter' => [
+                'type' => 'string',
+                'pattern' => '^%([a-zA-Z0-9_.])+%$',
+            ],
         ];
     }
 }

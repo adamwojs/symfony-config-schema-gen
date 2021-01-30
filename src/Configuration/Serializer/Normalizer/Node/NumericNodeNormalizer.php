@@ -6,16 +6,20 @@ namespace AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\No
 
 use ReflectionObject;
 use Symfony\Component\Config\Definition\NumericNode;
+use Symfony\Component\Config\Definition\ScalarNode;
 
 class NumericNodeNormalizer extends ScalarNodeNormalizer
 {
-    /**
-     * @param \Symfony\Component\Config\Definition\NumericNode $node
-     */
-    public function normalize($node, string $format = null, array $context = [])
+    public function supportsNormalization($data, string $format = null)
     {
-        $schema = parent::normalize($node, $format, $context);
-        $schema['type'] = 'number';
+        return $data instanceof NumericNode;
+    }
+
+    protected function getValueSchema(ScalarNode $node, string $format = null, array $context = []): array
+    {
+        $schema = [
+            'type' => 'number',
+        ];
 
         [$minValue, $maxValue] = $this->getMinMaxValue($node);
 
@@ -27,14 +31,7 @@ class NumericNodeNormalizer extends ScalarNodeNormalizer
             $schema['exclusiveMaximum'] = $maxValue;
         }
 
-        unset($schema['$ref']);
-
         return $schema;
-    }
-
-    public function supportsNormalization($data, string $format = null)
-    {
-        return $data instanceof NumericNode;
     }
 
     private function getMinMaxValue(NumericNode $node): array
