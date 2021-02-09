@@ -25,7 +25,7 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
         foreach ($node->getChildren() as $child) {
             $schema['properties'][$child->getName()] = $this->normalizer->normalize($child, $format, $context);
 
-            if ($child->isRequired()) {
+            if ($child->isRequired() && $context['strict'] === true) {
                 $schema['required'][] = $child->getName();
             }
         }

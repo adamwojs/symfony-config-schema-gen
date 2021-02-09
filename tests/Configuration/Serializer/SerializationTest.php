@@ -27,13 +27,13 @@ final class SerializationTest extends TestCase
     /**
      * @dataProvider dataProviderForTestSerializer
      */
-    public function testSerialize(ConfigurationCollection $collection, $expectedSchema): void
+    public function testSerialize(ConfigurationCollection $collection, $expectedSchema, array $context = []): void
     {
         $serializer = $this->createSerializer();
 
         $actualSchema = $serializer->normalize($collection, 'json', [
             'schema_id' => 'http://symfony.com/schema/config.schema.json',
-        ]);
+        ] + $context);
 
         if (getenv('ENABLE_RECORD')) {
             var_export($actualSchema);
@@ -44,11 +44,24 @@ final class SerializationTest extends TestCase
 
     public function dataProviderForTestSerializer(): iterable
     {
-        yield [
+        yield 'strict' => [
             new ConfigurationCollection([
                 'acme_root' => new ExampleConfiguration(),
             ]),
-            require_once __DIR__ . '/../Fixtures/ExampleConfiguration.result.php',
+            require_once __DIR__ . '/../Fixtures/ExampleConfiguration.strict.php',
+            [
+                'strict' => true,
+            ],
+        ];
+
+        yield 'relaxed' => [
+            new ConfigurationCollection([
+                'acme_root' => new ExampleConfiguration(),
+            ]),
+            require_once __DIR__ . '/../Fixtures/ExampleConfiguration.relaxed.php',
+            [
+                'strict' => false,
+            ],
         ];
     }
 

@@ -59,13 +59,23 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             InputOption::VALUE_NONE,
             'Prettify schema output'
         );
+
+        $this->addOption(
+            'strict',
+            null,
+            InputOption::VALUE_NONE,
+            'Generate strict schema'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $format = $input->getOption('format');
 
-        $context = [];
+        $context = [
+            'strict' => $input->getOption('strict'),
+        ];
+
         if ($input->getOption('pretty-print') && $format === 'json') {
             $context = [
                 'json_encode_options' => JSON_PRETTY_PRINT,

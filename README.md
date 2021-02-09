@@ -57,6 +57,7 @@ Options:
       --schema-id=SCHEMA-ID      Unique identifier for the schema [default: "http://symfony.com/schema/config.schema.json"]
       --format=FORMAT            Output format [default: "json"]
       --pretty-print             Prettify schema output
+      --strict                   Generates strict schema
   -h, --help                     Display this help message
   -q, --quiet                    Do not output any message
   -V, --version                  Display this application version
