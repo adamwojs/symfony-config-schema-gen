@@ -77,9 +77,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         ];
 
         if ($input->getOption('pretty-print') && $format === 'json') {
-            $context = [
-                'json_encode_options' => JSON_PRETTY_PRINT,
-            ];
+            $context['json_encode_options'] = JSON_PRETTY_PRINT;
         }
 
         $schema = $this->createSerializer()->serialize(
