@@ -97,8 +97,21 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
     {
         $configurations = [];
 
+        $kernel = $this->getApplication()->getKernel();
         /** @var \Symfony\Component\HttpKernel\Bundle\Bundle[] $bundles */
-        $bundles = $this->getApplication()->getKernel()->getBundles();
+        $bundles = $kernel->getBundles();
+
+        $container = $this->getContainerBuilder();
+        foreach ($bundles as $bundle) {
+            if ($extension = $bundle->getContainerExtension()) {
+                $container->registerExtension($extension);
+            }
+        }
+
+        foreach ($bundles as $bundle) {
+            $bundle->build($container);
+        }
+
         foreach ($bundles as $bundle) {
             $extension = $bundle->getContainerExtension();
             if ($extension === null) {
@@ -113,7 +126,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             if ($extension instanceof ConfigurationInterface) {
                 $configuration = $extension;
             } else {
-                $configuration = $extension->getConfiguration([], $this->getContainerBuilder());
+                $configuration = $extension->getConfiguration([], $container);
             }
 
             if ($configuration instanceof ConfigurationInterface) {
