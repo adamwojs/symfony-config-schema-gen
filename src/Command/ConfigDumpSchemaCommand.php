@@ -73,6 +73,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         $format = $input->getOption('format');
 
         $context = [
+            'schema_id' => $input->getOption('schema-id'),
             'strict' => $input->getOption('strict'),
         ];
 
