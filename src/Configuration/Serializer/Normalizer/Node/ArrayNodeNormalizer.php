@@ -38,7 +38,7 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
             unset($schema['required']);
         }
 
-        $schema['additionalProperties'] = false;
+        $schema['additionalProperties'] = !$context['strict'];
 
         return $schema;
     }
