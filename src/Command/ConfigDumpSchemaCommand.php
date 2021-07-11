@@ -7,6 +7,7 @@ namespace AdamWojs\SymfonyConfigGenBundle\Command;
 use AdamWojs\SymfonyConfigGenBundle\Configuration\ConfigurationCollection;
 use AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory;
 use Symfony\Bundle\FrameworkBundle\Command\AbstractConfigCommand;
+use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -66,6 +67,13 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             InputOption::VALUE_NONE,
             'Generate strict schema'
         );
+
+        $this->addOption(
+            'skip-empty',
+            null,
+            InputOption::VALUE_NONE,
+            'Skip schema generation for extensions with empty configuration'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -83,7 +91,8 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
 
         $schema = $this->createSerializer()->serialize(
             $this->getConfigurationCollection(
-                $input->getArgument('extensions')
+                $input->getArgument('extensions'),
+                $input->getOption('skip-empty')
             ),
             $format,
             $context
@@ -94,7 +103,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         return self::SUCCESS;
     }
 
-    private function getConfigurationCollection(array $allowedExtensions): ConfigurationCollection
+    private function getConfigurationCollection(array $allowedExtensions, bool $skipEmpty = true): ConfigurationCollection
     {
         $configurations = [];
 
@@ -131,7 +140,9 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             }
 
             if ($configuration instanceof ConfigurationInterface) {
-                $configurations[$alias] = $configuration;
+                if (!$skipEmpty || !$this->isEmptyConfiguration($configuration)) {
+                    $configurations[$alias] = $configuration;
+                }
             }
         }
 
@@ -141,5 +152,15 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
     private function createSerializer(): Serializer
     {
         return $this->serializerFactory->createSerializer();
+    }
+
+    private function isEmptyConfiguration(ConfigurationInterface $configuration): bool
+    {
+        $tree = $configuration->getConfigTreeBuilder()->buildTree();
+        if ($tree instanceof ArrayNode) {
+            return empty($tree->getChildren());
+        }
+
+        return false;
     }
 }
