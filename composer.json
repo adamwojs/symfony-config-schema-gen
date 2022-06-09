@@ -4,7 +4,7 @@
   "keywords": [
     "symfony", "symfony-bundle", "config", "json-schema"
   ],
-  "type": "synfony-bundle",
+  "type": "symfony-bundle",
   "require": {
     "php": "^7.3||^8.0",
     "ext-json": "*",
