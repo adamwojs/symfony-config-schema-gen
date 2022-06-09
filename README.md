@@ -16,7 +16,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-$ composer require adamwojs/symfony-config-schema-gen
+composer require adamwojs/symfony-config-schema-gen --dev
 ```
 
 This command requires you to have Composer installed globally, as explained  
@@ -41,7 +41,7 @@ return [
 ### Basic usage
 
 ```console
-$ php bin/console config:dump-schema > config.schema.json
+php bin/console config:dump-schema > config.schema.json
 ```
 
 ### Synopsis
