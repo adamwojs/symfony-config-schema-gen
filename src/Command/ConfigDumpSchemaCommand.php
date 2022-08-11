@@ -111,7 +111,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         /** @var \Symfony\Component\HttpKernel\Bundle\Bundle[] $bundles */
         $bundles = $kernel->getBundles();
 
-        $container = $this->getContainerBuilder();
+        $container = $this->getContainerBuilder($kernel);
         foreach ($bundles as $bundle) {
             if ($extension = $bundle->getContainerExtension()) {
                 $container->registerExtension($extension);
