@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\Node;
 
 use Symfony\Component\Config\Definition\IntegerNode;
-use Symfony\Component\Config\Definition\ScalarNode;
 
 class IntegerNodeNormalizer extends NumericNodeNormalizer
 {
@@ -14,14 +13,13 @@ class IntegerNodeNormalizer extends NumericNodeNormalizer
         return $data instanceof IntegerNode;
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\IntegerNode $object
-     */
-    protected function getValueSchema(ScalarNode $node, string $format = null, array $context = []): array
+    protected function getValueBaseType(): string
     {
-        $schema = parent::getValueSchema($node, $format, $context);
-        $schema['type'] = 'integer';
+        return 'integer';
+    }
 
-        return $schema;
+    protected function getValueDefaultDefinitionRef(): string
+    {
+        return '#/definitions/integer_or_parameter';
     }
 }

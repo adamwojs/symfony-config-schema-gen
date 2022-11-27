@@ -81,6 +81,56 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
                 'type' => 'string',
                 'pattern' => '^%([a-zA-Z0-9_.])+%$',
             ],
+            'boolean_or_parameter' => [
+                'anyOf' => [
+                    [
+                        'type' => 'boolean',
+                    ],
+                    [
+                        '$ref' => '#/definitions/parameter',
+                    ],
+                ],
+            ],
+            'integer_or_parameter' => [
+                'anyOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        '$ref' => '#/definitions/parameter',
+                    ],
+                ],
+            ],
+            'number_or_parameter' => [
+                'anyOf' => [
+                    [
+                        'type' => 'number',
+                    ],
+                    [
+                        '$ref' => '#/definitions/parameter',
+                    ],
+                ],
+            ],
+            'scalar_or_parameter' => [
+                'anyOf' => [
+                    [
+                        '$ref' => '#/definitions/scalar',
+                    ],
+                    [
+                        '$ref' => '#/definitions/parameter',
+                    ],
+                ],
+            ],
+            'variable_or_parameter' => [
+                'anyOf' => [
+                    [
+                        '$ref' => '#/definitions/variable',
+                    ],
+                    [
+                        '$ref' => '#/definitions/parameter',
+                    ],
+                ],
+            ],
         ];
     }
 }

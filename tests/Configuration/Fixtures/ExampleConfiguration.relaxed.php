@@ -9,104 +9,41 @@ return [
             'type' => 'object',
             'properties' => [
                 'boolean' => [
-                    'anyOf' => [
-                        0 => [
-                            'type' => 'boolean',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/boolean_or_parameter',
                     'default' => true,
                 ],
                 'scalar_empty' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                 ],
                 'scalar_null' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => null,
                 ],
                 'scalar_true' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => true,
                 ],
                 'scalar_false' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => false,
                 ],
                 'scalar_default' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => 'default',
                 ],
                 'scalar_array_empty' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => [],
                 ],
                 'scalar_array_defaults' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                     'default' => [
                         0 => 'elem1',
                         1 => 'elem2',
                     ],
                 ],
                 'scalar_required' => [
-                    'anyOf' => [
-                        0 => [
-                            '$ref' => '#/definitions/scalar',
-                        ],
-                        1 => [
-                            '$ref' => '#/definitions/parameter',
-                        ],
-                    ],
+                    '$ref' => '#/definitions/scalar_or_parameter',
                 ],
                 'enum_with_default' => [
                     'anyOf' => [
@@ -140,24 +77,10 @@ return [
                     'type' => 'object',
                     'properties' => [
                         'child1' => [
-                            'anyOf' => [
-                                0 => [
-                                    '$ref' => '#/definitions/scalar',
-                                ],
-                                1 => [
-                                    '$ref' => '#/definitions/parameter',
-                                ],
-                            ],
+                            '$ref' => '#/definitions/scalar_or_parameter',
                         ],
                         'child2' => [
-                            'anyOf' => [
-                                0 => [
-                                    '$ref' => '#/definitions/scalar',
-                                ],
-                                1 => [
-                                    '$ref' => '#/definitions/parameter',
-                                ],
-                            ],
+                            '$ref' => '#/definitions/scalar_or_parameter',
                         ],
                         'child3' => [
                             'description' => 'this is a long
@@ -166,14 +89,7 @@ which should be indented',
                             'examples' => [
                                 0 => 'example setting',
                             ],
-                            'anyOf' => [
-                                0 => [
-                                    '$ref' => '#/definitions/scalar',
-                                ],
-                                1 => [
-                                    '$ref' => '#/definitions/parameter',
-                                ],
-                            ],
+                            '$ref' => '#/definitions/scalar_or_parameter',
                         ],
                     ],
                     'additionalProperties' => true,
@@ -190,27 +106,13 @@ which should be indented',
                         0 => [
                             'type' => 'array',
                             'items' => [
-                                'anyOf' => [
-                                    0 => [
-                                        '$ref' => '#/definitions/scalar',
-                                    ],
-                                    1 => [
-                                        '$ref' => '#/definitions/parameter',
-                                    ],
-                                ],
+                                '$ref' => '#/definitions/scalar_or_parameter',
                             ],
                         ],
                         1 => [
                             'type' => 'object',
                             'additionalProperties' => [
-                                'anyOf' => [
-                                    0 => [
-                                        '$ref' => '#/definitions/scalar',
-                                    ],
-                                    1 => [
-                                        '$ref' => '#/definitions/parameter',
-                                    ],
-                                ],
+                                '$ref' => '#/definitions/scalar_or_parameter',
                             ],
                         ],
                     ],
@@ -221,28 +123,14 @@ which should be indented',
                             'type' => 'array',
                             'items' => [
                                 'description' => 'Parameter name',
-                                'anyOf' => [
-                                    0 => [
-                                        '$ref' => '#/definitions/scalar',
-                                    ],
-                                    1 => [
-                                        '$ref' => '#/definitions/parameter',
-                                    ],
-                                ],
+                                '$ref' => '#/definitions/scalar_or_parameter',
                             ],
                         ],
                         1 => [
                             'type' => 'object',
                             'additionalProperties' => [
                                 'description' => 'Parameter name',
-                                'anyOf' => [
-                                    0 => [
-                                        '$ref' => '#/definitions/scalar',
-                                    ],
-                                    1 => [
-                                        '$ref' => '#/definitions/parameter',
-                                    ],
-                                ],
+                                '$ref' => '#/definitions/scalar_or_parameter',
                             ],
                         ],
                     ],
@@ -255,24 +143,10 @@ which should be indented',
                                 'type' => 'object',
                                 'properties' => [
                                     'user' => [
-                                        'anyOf' => [
-                                            0 => [
-                                                '$ref' => '#/definitions/scalar',
-                                            ],
-                                            1 => [
-                                                '$ref' => '#/definitions/parameter',
-                                            ],
-                                        ],
+                                        '$ref' => '#/definitions/scalar_or_parameter',
                                     ],
                                     'pass' => [
-                                        'anyOf' => [
-                                            0 => [
-                                                '$ref' => '#/definitions/scalar',
-                                            ],
-                                            1 => [
-                                                '$ref' => '#/definitions/parameter',
-                                            ],
-                                        ],
+                                        '$ref' => '#/definitions/scalar_or_parameter',
                                     ],
                                 ],
                                 'additionalProperties' => true,
@@ -284,24 +158,10 @@ which should be indented',
                                 'type' => 'object',
                                 'properties' => [
                                     'user' => [
-                                        'anyOf' => [
-                                            0 => [
-                                                '$ref' => '#/definitions/scalar',
-                                            ],
-                                            1 => [
-                                                '$ref' => '#/definitions/parameter',
-                                            ],
-                                        ],
+                                        '$ref' => '#/definitions/scalar_or_parameter',
                                     ],
                                     'pass' => [
-                                        'anyOf' => [
-                                            0 => [
-                                                '$ref' => '#/definitions/scalar',
-                                            ],
-                                            1 => [
-                                                '$ref' => '#/definitions/parameter',
-                                            ],
-                                        ],
+                                        '$ref' => '#/definitions/scalar_or_parameter',
                                     ],
                                 ],
                                 'additionalProperties' => true,
@@ -321,24 +181,10 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'title' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                                 'path' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -350,24 +196,10 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'title' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                                 'path' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -386,24 +218,10 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'title' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                                 'path' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -415,24 +233,10 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'title' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                                 'path' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -455,14 +259,7 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'didou' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -474,14 +271,7 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'didou' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -500,14 +290,7 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'didou' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -519,14 +302,7 @@ which should be indented',
                                             'type' => 'object',
                                             'properties' => [
                                                 'didou' => [
-                                                    'anyOf' => [
-                                                        0 => [
-                                                            '$ref' => '#/definitions/scalar',
-                                                        ],
-                                                        1 => [
-                                                            '$ref' => '#/definitions/parameter',
-                                                        ],
-                                                    ],
+                                                    '$ref' => '#/definitions/scalar_or_parameter',
                                                 ],
                                             ],
                                             'additionalProperties' => true,
@@ -580,6 +356,56 @@ which should be indented',
         'parameter' => [
             'type' => 'string',
             'pattern' => '^%([a-zA-Z0-9_.])+%$',
+        ],
+        'boolean_or_parameter' => [
+            'anyOf' => [
+                0 => [
+                    'type' => 'boolean',
+                ],
+                1 => [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ],
+        ],
+        'integer_or_parameter' => [
+            'anyOf' => [
+                0 => [
+                    'type' => 'integer',
+                ],
+                1 => [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ],
+        ],
+        'number_or_parameter' => [
+            'anyOf' => [
+                0 => [
+                    'type' => 'number',
+                ],
+                1 => [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ],
+        ],
+        'scalar_or_parameter' => [
+            'anyOf' => [
+                0 => [
+                    '$ref' => '#/definitions/scalar',
+                ],
+                1 => [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ],
+        ],
+        'variable_or_parameter' => [
+            'anyOf' => [
+                0 => [
+                    '$ref' => '#/definitions/variable',
+                ],
+                1 => [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ],
         ],
     ],
 ];

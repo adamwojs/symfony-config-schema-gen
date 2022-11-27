@@ -11,14 +11,7 @@ final class VariableNodeNormalizer extends BaseNodeNormalizer
     public function normalize($node, string $format = null, array $context = [])
     {
         $schema = parent::normalize($node, $format, $context);
-        $schema['anyOf'] = [
-            [
-                '$ref' => '#/definitions/variable',
-            ],
-            [
-                '$ref' => '#/definitions/parameter',
-            ],
-        ];
+        $schema['$ref'] = '#/definitions/variable_or_parameter';
 
         return $schema;
     }

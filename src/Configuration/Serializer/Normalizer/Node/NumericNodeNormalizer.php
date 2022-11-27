@@ -6,22 +6,53 @@ namespace AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\Normalizer\No
 
 use ReflectionObject;
 use Symfony\Component\Config\Definition\NumericNode;
-use Symfony\Component\Config\Definition\ScalarNode;
 
-class NumericNodeNormalizer extends ScalarNodeNormalizer
+class NumericNodeNormalizer extends BaseNodeNormalizer
 {
     public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof NumericNode;
     }
 
-    protected function getValueSchema(ScalarNode $node, string $format = null, array $context = []): array
+    public function normalize($node, string $format = null, array $context = [])
     {
-        $schema = [
-            'type' => 'number',
-        ];
+        $schema = parent::normalize($node, $format, $context);
 
         [$minValue, $maxValue] = $this->getMinMaxValue($node);
+
+        if ($minValue === null && $maxValue === null) {
+            $schema['$ref'] = $this->getValueDefaultDefinitionRef();
+        } else {
+            $schema['anyOf'] = [
+                $this->getValueSchema($minValue, $maxValue),
+                [
+                    '$ref' => '#/definitions/parameter',
+                ],
+            ];
+        }
+
+        if ($node->hasDefaultValue()) {
+            $schema['default'] = $node->getDefaultValue();
+        }
+
+        return $schema;
+    }
+
+    protected function getValueDefaultDefinitionRef(): string
+    {
+        return '#/definitions/numeric_or_parameter';
+    }
+
+    protected function getValueBaseType(): string
+    {
+        return 'number';
+    }
+
+    private function getValueSchema($minValue, $maxValue): array
+    {
+        $schema = [
+            'type' => $this->getValueBaseType(),
+        ];
 
         if ($minValue !== null) {
             $schema['exclusiveMinimum'] = $minValue;

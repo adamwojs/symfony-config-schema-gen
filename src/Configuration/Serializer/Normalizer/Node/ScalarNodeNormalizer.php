@@ -14,12 +14,7 @@ class ScalarNodeNormalizer extends BaseNodeNormalizer
     public function normalize($node, string $format = null, array $context = [])
     {
         $schema = parent::normalize($node, $format, $context);
-        $schema['anyOf'] = [
-            $this->getValueSchema($node, $format, $context),
-            [
-                '$ref' => '#/definitions/parameter',
-            ],
-        ];
+        $schema['$ref'] = '#/definitions/scalar_or_parameter';
 
         if ($node->hasDefaultValue()) {
             $schema['default'] = $node->getDefaultValue();
@@ -31,12 +26,5 @@ class ScalarNodeNormalizer extends BaseNodeNormalizer
     public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof ScalarNode;
-    }
-
-    protected function getValueSchema(ScalarNode $node, string $format = null, array $context = []): array
-    {
-        return [
-            '$ref' => '#/definitions/scalar',
-        ];
     }
 }
