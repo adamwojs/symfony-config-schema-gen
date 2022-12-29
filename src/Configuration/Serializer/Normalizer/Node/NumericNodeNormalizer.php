@@ -55,11 +55,11 @@ class NumericNodeNormalizer extends BaseNodeNormalizer
         ];
 
         if ($minValue !== null) {
-            $schema['exclusiveMinimum'] = $minValue;
+            $schema['minimum'] = $minValue;
         }
 
         if ($maxValue !== null) {
-            $schema['exclusiveMaximum'] = $maxValue;
+            $schema['maximum'] = $maxValue;
         }
 
         return $schema;
