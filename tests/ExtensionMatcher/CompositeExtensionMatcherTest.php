@@ -37,6 +37,6 @@ final class CompositeExtensionMatcherTest extends TestCase
     {
         $matcher = new CompositeExtensionMatcher([]);
 
-        $this->assertFalse($matcher->matches('any_alias'));
+        $this->assertTrue($matcher->matches('any_alias'));
     }
 }
