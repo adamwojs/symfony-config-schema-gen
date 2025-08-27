@@ -19,14 +19,11 @@ use Symfony\Component\Serializer\Serializer;
 #[AsCommand('config:dump-schema', 'Dumps the configuration schema for enabled extensions')]
 final class ConfigDumpSchemaCommand extends AbstractConfigCommand
 {
-    /** @var \AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory */
-    private $serializerFactory;
-
-    public function __construct(SerializerFactory $serializerFactory, ?string $name = null)
-    {
+    public function __construct(
+        private readonly SerializerFactory $serializerFactory,
+        ?string $name = null
+    ) {
         parent::__construct($name);
-
-        $this->serializerFactory = $serializerFactory;
     }
 
     protected function configure(): void

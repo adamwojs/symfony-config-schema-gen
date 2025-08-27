@@ -8,20 +8,20 @@ use Symfony\Component\Config\Definition\EnumNode;
 
 class EnumNodeNormalizer extends BaseNodeNormalizer
 {
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
-        $schema = parent::normalize($node, $format, $context);
+        $schema = parent::normalize($data, $format, $context);
         $schema['anyOf'] = [
             [
-                'enum' => $node->getValues(),
+                'enum' => $data->getValues(),
             ],
             [
                 '$ref' => '#/definitions/parameter',
             ],
         ];
 
-        if ($node->hasDefaultValue()) {
-            $schema['default'] = $node->getDefaultValue();
+        if ($data->hasDefaultValue()) {
+            $schema['default'] = $data->getDefaultValue();
         }
 
         return $schema;

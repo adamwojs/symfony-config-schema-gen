@@ -13,16 +13,16 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
     use NormalizerAwareTrait;
 
     /**
-     * @param \Symfony\Component\Config\Definition\ArrayNode $node
+     * @param \Symfony\Component\Config\Definition\ArrayNode $data
      */
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
-        $schema = parent::normalize($node, $format, $context);
+        $schema = parent::normalize($data, $format, $context);
         $schema['type'] = 'object';
         $schema['properties'] = [];
         $schema['required'] = [];
 
-        foreach ($node->getChildren() as $child) {
+        foreach ($data->getChildren() as $child) {
             $schema['properties'][$child->getName()] = $this->normalizer->normalize($child, $format, $context);
 
             if ($child->isRequired() && $context['strict'] === true) {

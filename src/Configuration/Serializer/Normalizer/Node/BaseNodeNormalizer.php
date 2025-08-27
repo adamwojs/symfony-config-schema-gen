@@ -10,18 +10,18 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class BaseNodeNormalizer implements NormalizerInterface
 {
     /**
-     * @param \Symfony\Component\Config\Definition\BaseNode $node
+     * @param \Symfony\Component\Config\Definition\BaseNode $data
      */
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
         $schema = [];
 
-        if ($node->getInfo() !== null) {
-            $schema['description'] = $node->getInfo();
+        if ($data->getInfo() !== null) {
+            $schema['description'] = $data->getInfo();
         }
 
-        if ($node->getExample() !== null) {
-            $schema['examples'] = [$node->getExample()];
+        if ($data->getExample() !== null) {
+            $schema['examples'] = [$data->getExample()];
         }
 
         return $schema;
