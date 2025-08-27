@@ -7,6 +7,7 @@ services:
     AdamWojs\SymfonyConfigGenBundle\Command\ConfigDumpSchemaCommand:
         arguments:
             $serializerFactory: '@AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory'
+            $extensionMatcherFactory: '@AdamWojs\SymfonyConfigGenBundle\ExtensionMatcher\ExtensionMatcherFactory'
         tags:
             - { name: console.command, command: 'config:dump-schema' }
 
