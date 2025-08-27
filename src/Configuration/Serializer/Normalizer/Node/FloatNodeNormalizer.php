@@ -8,7 +8,7 @@ use Symfony\Component\Config\Definition\FloatNode;
 
 class FloatNodeNormalizer extends NumericNodeNormalizer
 {
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof FloatNode;
     }

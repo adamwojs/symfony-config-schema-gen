@@ -15,7 +15,7 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
     /**
      * @param \Symfony\Component\Config\Definition\ArrayNode $node
      */
-    public function normalize($node, string $format = null, array $context = [])
+    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
         $schema = parent::normalize($node, $format, $context);
         $schema['type'] = 'object';
@@ -43,8 +43,15 @@ class ArrayNodeNormalizer extends BaseNodeNormalizer implements NormalizerAwareI
         return $schema;
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof ArrayNode;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            ArrayNode::class => false,
+        ];
     }
 }

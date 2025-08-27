@@ -15,7 +15,7 @@ class PrototypedArrayNodeNormalizer extends BaseNodeNormalizer implements Normal
     /**
      * @param \Symfony\Component\Config\Definition\PrototypedArrayNode $node
      */
-    public function normalize($node, string $format = null, array $context = [])
+    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
         $schema = parent::normalize($node, $format, $context);
 
@@ -35,7 +35,7 @@ class PrototypedArrayNodeNormalizer extends BaseNodeNormalizer implements Normal
         return $schema;
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof PrototypedArrayNode;
     }
