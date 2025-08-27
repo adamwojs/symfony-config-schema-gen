@@ -18,7 +18,7 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
     /**
      * @param \AdamWojs\SymfonyConfigGenBundle\Configuration\ConfigurationCollection $object
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize(mixed $object, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
         $schema = [
             '$schema' => self::SCHEMA_VERSION_7,
@@ -42,7 +42,7 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
         return $schema;
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         return $data instanceof ConfigurationCollection;
     }
@@ -131,6 +131,13 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
                     ],
                 ],
             ],
+        ];
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            ConfigurationCollection::class => true,
         ];
     }
 }
