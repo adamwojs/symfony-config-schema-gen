@@ -33,7 +33,10 @@
   "scripts": {
     "fix-cs": "php-cs-fixer fix -v --show-progress=bar",
     "check-cs": "php-cs-fixer fix --dry-run -v --show-progress=bar",
-    "unit-tests": "phpunit -c phpunit.xml.dist"
+    "unit-tests": "phpunit -c phpunit.xml.dist",
+    "test": [
+      "@unit-tests"
+    ]
   },
   "extra": {
     "branch-alias": {
