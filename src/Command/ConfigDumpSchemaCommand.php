@@ -6,6 +6,8 @@ namespace AdamWojs\SymfonyConfigGenBundle\Command;
 
 use AdamWojs\SymfonyConfigGenBundle\Configuration\ConfigurationCollection;
 use AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory;
+use AdamWojs\SymfonyConfigGenBundle\ExtensionMatcher\ExtensionMatcherFactory;
+use AdamWojs\SymfonyConfigGenBundle\ExtensionMatcher\ExtensionMatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Command\AbstractConfigCommand;
 use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,6 +23,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
 {
     public function __construct(
         private readonly SerializerFactory $serializerFactory,
+        private readonly ExtensionMatcherFactory $extensionMatcherFactory,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -31,7 +34,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         $this->addArgument(
             'extensions',
             InputArgument::IS_ARRAY,
-            'Extensions whitelist',
+            'List of extensions to include in the schema (separate multiple names with a space). Extensions are matched by their alias. If omitted, all extensions are included. Wildcards are allowed, e.g. "doctrine_*".',
             []
         );
 
@@ -88,7 +91,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
 
         $schema = $this->createSerializer()->serialize(
             $this->getConfigurationCollection(
-                $input->getArgument('extensions'),
+                $this->extensionMatcherFactory->createCompositeMatcher($input->getArgument('extensions')),
                 $input->getOption('skip-empty')
             ),
             $format,
@@ -100,7 +103,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
         return self::SUCCESS;
     }
 
-    private function getConfigurationCollection(array $allowedExtensions, bool $skipEmpty = true): ConfigurationCollection
+    private function getConfigurationCollection(ExtensionMatcherInterface $extensions, bool $skipEmpty = true): ConfigurationCollection
     {
         $configurations = [];
 
@@ -126,7 +129,7 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
             }
 
             $alias = $extension->getAlias();
-            if (!empty($allowedExtensions) && !in_array($alias, $allowedExtensions)) {
+            if (!$extensions->matches($alias)) {
                 continue;
             }
 
