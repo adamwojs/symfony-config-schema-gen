@@ -10,6 +10,8 @@ services:
         tags:
             - { name: console.command, command: 'config:dump-schema' }
 
+    AdamWojs\SymfonyConfigGenBundle\ExtensionMatcher\ExtensionMatcherFactory: ~
+
     AdamWojs\SymfonyConfigGenBundle\Configuration\Serializer\SerializerFactory:
         arguments:
             $normalizers: !tagged_iterator config_schema_generator.normalizer
