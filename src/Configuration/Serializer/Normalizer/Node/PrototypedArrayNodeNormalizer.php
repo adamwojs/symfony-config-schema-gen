@@ -13,13 +13,13 @@ class PrototypedArrayNodeNormalizer extends BaseNodeNormalizer implements Normal
     use NormalizerAwareTrait;
 
     /**
-     * @param \Symfony\Component\Config\Definition\PrototypedArrayNode $node
+     * @param \Symfony\Component\Config\Definition\PrototypedArrayNode $data
      */
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
-        $schema = parent::normalize($node, $format, $context);
+        $schema = parent::normalize($data, $format, $context);
 
-        $prototypeSchema = $this->normalizer->normalize($node->getPrototype(), $format, $context);
+        $prototypeSchema = $this->normalizer->normalize($data->getPrototype(), $format, $context);
 
         $schema['oneOf'] = [
             [

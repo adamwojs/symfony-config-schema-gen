@@ -13,7 +13,7 @@ final class ConfigurationCollectionNormalizer implements NormalizerInterface, No
 {
     use NormalizerAwareTrait;
 
-    private const SCHEMA_VERSION_7 = 'http://json-schema.org/draft-07/schema#';
+    private const string SCHEMA_VERSION_7 = 'http://json-schema.org/draft-07/schema#';
 
     /**
      * @param \AdamWojs\SymfonyConfigGenBundle\Configuration\ConfigurationCollection $object

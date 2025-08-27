@@ -9,15 +9,10 @@ use Symfony\Component\Serializer\Serializer;
 
 final class SerializerFactory
 {
-    /** @var \Symfony\Component\Serializer\Normalizer\NormalizerInterface */
-    private $normalizers;
-
-    public function __construct(iterable $normalizers)
-    {
-        $this->normalizers = [];
-        foreach ($normalizers as $normalizer) {
-            $this->normalizers[] = $normalizer;
-        }
+    public function __construct(
+        /** @var iterable<\Symfony\Component\Serializer\Normalizer\NormalizerInterface> */
+        private iterable $normalizers
+    ) {
     }
 
     public function createSerializer(): Serializer
@@ -26,6 +21,6 @@ final class SerializerFactory
             new JsonEncoder(),
         ];
 
-        return new Serializer($this->normalizers, $encoders);
+        return new Serializer(iterator_to_array($this->normalizers), $encoders);
     }
 }

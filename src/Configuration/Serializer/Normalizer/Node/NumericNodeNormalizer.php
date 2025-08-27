@@ -14,11 +14,11 @@ class NumericNodeNormalizer extends BaseNodeNormalizer
         return $data instanceof NumericNode;
     }
 
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
-        $schema = parent::normalize($node, $format, $context);
+        $schema = parent::normalize($data, $format, $context);
 
-        [$minValue, $maxValue] = $this->getMinMaxValue($node);
+        [$minValue, $maxValue] = $this->getMinMaxValue($data);
 
         if ($minValue === null && $maxValue === null) {
             $schema['$ref'] = $this->getValueDefaultDefinitionRef();
@@ -31,8 +31,8 @@ class NumericNodeNormalizer extends BaseNodeNormalizer
             ];
         }
 
-        if ($node->hasDefaultValue()) {
-            $schema['default'] = $node->getDefaultValue();
+        if ($data->hasDefaultValue()) {
+            $schema['default'] = $data->getDefaultValue();
         }
 
         return $schema;

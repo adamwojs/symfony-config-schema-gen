@@ -9,15 +9,15 @@ use Symfony\Component\Config\Definition\ScalarNode;
 class ScalarNodeNormalizer extends BaseNodeNormalizer
 {
     /**
-     * @param \Symfony\Component\Config\Definition\ScalarNode $node
+     * @param \Symfony\Component\Config\Definition\ScalarNode $data
      */
-    public function normalize(mixed $node, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    public function normalize(mixed $data, string $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
-        $schema = parent::normalize($node, $format, $context);
+        $schema = parent::normalize($data, $format, $context);
         $schema['$ref'] = '#/definitions/scalar_or_parameter';
 
-        if ($node->hasDefaultValue()) {
-            $schema['default'] = $node->getDefaultValue();
+        if ($data->hasDefaultValue()) {
+            $schema['default'] = $data->getDefaultValue();
         }
 
         return $schema;

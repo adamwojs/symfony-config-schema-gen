@@ -10,16 +10,11 @@ use IteratorAggregate;
 
 final class ConfigurationCollection implements IteratorAggregate
 {
-    /** @var \Symfony\Component\Config\Definition\ConfigurationInterface[] */
-    private $configurations;
-
     /**
      * @param \Symfony\Component\Config\Definition\ConfigurationInterface[] $configurations
      */
-    public function __construct(array $configurations)
+    public function __construct(private array $configurations)
     {
-        $this->configurations = $configurations;
-
         ksort($this->configurations, SORT_STRING);
     }
 
