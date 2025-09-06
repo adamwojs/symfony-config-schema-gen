@@ -11,6 +11,7 @@ use AdamWojs\SymfonyConfigGenBundle\ExtensionMatcher\ExtensionMatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Command\AbstractConfigCommand;
 use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\PrototypedArrayNode;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -157,6 +158,10 @@ final class ConfigDumpSchemaCommand extends AbstractConfigCommand
     private function isEmptyConfiguration(ConfigurationInterface $configuration): bool
     {
         $tree = $configuration->getConfigTreeBuilder()->buildTree();
+        if ($tree instanceof PrototypedArrayNode) {
+            return false;
+        }
+
         if ($tree instanceof ArrayNode) {
             return empty($tree->getChildren());
         }
